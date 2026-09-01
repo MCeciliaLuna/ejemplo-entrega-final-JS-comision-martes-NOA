@@ -1,0 +1,44 @@
+body{
+    background-color: cadetblue;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+input, button{
+    padding: 0.7rem;
+    border-radius: 10px;
+    border:none
+}
+
+input{
+    width: 100%;
+}
+
+label{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 50%;
+    font-size: 1.3em;
+}
+
+button{
+    width: 30%;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: rgba(49, 179, 184, 0.701);
+    color: whitesmoke;
+}
+
+footer, h1{
+    text-align: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    justify-content: center;
+    align-items: center;
+}
