@@ -41,4 +41,10 @@ form{
     gap:10px;
     justify-content: center;
     align-items: center;
+    width:100%
+}
+
+main{
+    display: flex;
+    justify-content: center;
 }
