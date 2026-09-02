@@ -13,20 +13,23 @@
         <h1>Formulario de registro</h1>
     </header>
     <main>
-        <form>
+        <form onsubmit="datosUsuario(event)">
             <label>Nombre y apellido:
-                <input type="text" name="nombre-y-apellido" id="nombre-y-apellido">
+                <input type="text" name="nombre-y-apellido" id="nombre-y-apellido" required>
+            </label>
+            <label>Edad:
+                <input type="number" name="edad" id="edad" required>
             </label>
             <label>Email:
-                <input type="email" name="email" id="email">
+                <input type="email" name="email" id="email" required>
             </label>
             <label>
                 Contraseña:
-                <input type="password" name="contrasenia" id="contrasenia">
+                <input type="password" name="contrasenia" id="contrasenia" required>
             </label>
             <label>
                 Confirmar contraseña:
-                <input type="password" name="confirmacion-contrasenia" id="confirmacion-contrasenia">
+                <input type="password" name="confirmacion-contrasenia" id="confirmacion-contrasenia" required>
             </label>
             <button id="boton-creacion">Crear usuario</button>
         </form>
