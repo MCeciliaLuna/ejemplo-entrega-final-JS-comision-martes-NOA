@@ -1,12 +1,12 @@
 console.log("Hola mundo");
 
 const nombreUsuario = document.getElementById("nombre-y-apellido");
-const edadUsuario = document.getElementById("edad")
+const edadUsuario = document.getElementById("edad");
 const emailUsuario = document.getElementById("email");
 const contraseniaUsuario = document.getElementById("contrasenia");
 const confirmacionContraseniaUsuario = document.getElementById("confirmacion-contrasenia");
 
-const datosUsuario = (event) => {
+const registro = async (event) => {
     event.preventDefault();
 
     const nombre = nombreUsuario.value;
@@ -15,47 +15,70 @@ const datosUsuario = (event) => {
     const contrasenia = contraseniaUsuario.value;
     const confirmacionContrasenia = confirmacionContraseniaUsuario.value;
 
+
+    const url = "https://jsonplaceholder.typicode.com/users";
+    const respuesta = await fetch(url);
+    const users = await respuesta.json();
+
+    const usuariosRegistrados = users.map(
+        function(usuario) {
+            return usuario.email
+        }
+    )
+
+
+    const emailEncontrado = usuariosRegistrados.filter(
+        function (emailUserRegistrado) {
+            return emailUserRegistrado === email
+        }
+    );
+
+
+    if (emailEncontrado.length > 0) {
+        alert("Ingrese otro mail");
+        console.error(emailEncontrado, "El email ingresado ya está registrado.")
+        return
+    }
+
+
     const edadAprobada = 18;
 
     if (contrasenia !== confirmacionContrasenia) {
         alert("Las contraseñas no coinciden");
-    } else{
-        localStorage.setItem("contraseña", contrasenia);
+        console.error("Las contraseñas deben ser iguales.")
+        return;
     }
 
     if (edad < edadAprobada) {
         alert("Necesitas ser mayor de edad");
+        console.error("El usuario registró una edad menor a la aceptada.")
+        return;
     }
 
     if (edad === edadAprobada) {
         alert("Puedes ingresar pero con supervisión");
+        console.warn("El usuario necesita configurar una supervisión");
     }
 
-    localStorage.setItem("nombreUsuario", nombre);
     localStorage.setItem("emailUsuario", email);
 
     window.location.href = "bienvenida.html";
-
-    console.log(nombre, email, contrasenia, confirmacionContrasenia);
 };
 
 const usuarioLogueado = () => {
-    const usuarioLogueadoNombre = localStorage.getItem("nombreUsuario");
     const emailUsuarioLogueado = localStorage.getItem("emailUsuario")
-    const contraseñaUsuarioLogueado = localStorage.getItem("contraseña");
 
     if (emailUsuarioLogueado) {
         window.location.href = "bienvenida.html"
     }
+}
 
-    console.log(usuarioLogueadoNombre, emailUsuarioLogueado, contraseñaUsuarioLogueado)
+
+if (window.location.pathname !== "/bienvenida.html") {
+    usuarioLogueado();
 }
 
 const logout = () => {
     localStorage.clear();
     window.location.href = "index.html";
-}
-
-if (window.location.pathname !== "/bienvenida.html") {
-    usuarioLogueado();
 }
